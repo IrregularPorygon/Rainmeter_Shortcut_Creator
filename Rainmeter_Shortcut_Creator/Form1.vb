@@ -138,7 +138,15 @@ Public Class ShortcutCreator
         Dim baseFileReader As String
         Dim finalFileText As String
         Dim RainmeterLocation As String
-        RainmeterLocation = My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\Rainmeter"
+        Dim envRainmeter As String
+        envRainmeter = Environment.GetEnvironmentVariable("RAINMETER_HOME")
+        If envRainmeter Is Nothing Then
+            RainmeterLocation = My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\Rainmeter"
+        Else
+            RainmeterLocation = envRainmeter
+        End If
+
+        Console.WriteLine("Output is " + RainmeterLocation)
 
         If MonitorCheck.Checked = True Then
             baseFileReader = My.Resources.baseMonitor
